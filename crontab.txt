@@ -1,0 +1,1 @@
+00 08  *  *  1,4,5 sh ${HOME}/rvm_sendmail.sh
