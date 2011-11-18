@@ -13,8 +13,10 @@ class GarbageMailer < ActionMailer::Base
   end
 end
 
+yaml = YAML.load_file('settings.yml')
+
 ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.perform_deliveries = true
 ActionMailer::Base.raise_delivery_errors = true
-ActionMailer::Base.smtp_settings = YAML.load_file('settings.yml')['smtp_settings'].symbolize_keys
-GarbageMailer.garbage_message('aki.hosecarioka@gmail.com','ゴミンゴからのお知らせ','今日はゴミの日です！').deliver
+ActionMailer::Base.smtp_settings = yaml['smtp_settings'].symbolize_keys
+GarbageMailer.garbage_message( yaml['mail'], 'ゴミンゴからのお知らせ','今日はゴミの日です！' ).deliver
